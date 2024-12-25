@@ -38,6 +38,7 @@ namespace ProjectTesting
                 }
 
                 string decision;
+                double? discount = null;
                 if (user.UserAge < game.AgeRating)
                 {
                     decision = "Rejected";
@@ -47,11 +48,11 @@ namespace ProjectTesting
                     decision = "Approved";
                     if (user.UserAge >= game.IsEligibleForDiscount)
                     {
-                        _discountService.isEligibleForDiscount(user.UserAge);
+                        discount = _discountService.isEligibleForDiscount(user.UserAge);
                     }
                 }
 
-                return _actionHandler.HandleDecision(decision, game);
+                return _actionHandler.HandleDecision(decision, game, discount);
             }
             catch (ArgumentException)
             {
@@ -59,7 +60,7 @@ namespace ProjectTesting
             }
             catch (Exception)
             {
-                throw new Exception("An error occurred while making a decision.");
+                throw new Exception($"An error occurred while making a decision");
             }
         }
     }

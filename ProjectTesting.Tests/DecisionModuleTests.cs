@@ -43,16 +43,16 @@ namespace ProjectTesting.Tests
             };
             _mockService.Setup(service => service.GetGame(1)).Returns(game);
             _mockUserService.Setup(service => service.GetUser(1)).Returns(user);
-            _mockActionHandler.Setup(handler => handler.HandleDecision(Approved, game)).Returns(Approved);
-            _mockActionHandler.Setup(handler => handler.HandleDecision(Rejected, game)).Returns(Rejected);
+            _mockActionHandler.Setup(handler => handler.HandleDecision(Approved, game, null)).Returns(Approved);
+            _mockActionHandler.Setup(handler => handler.HandleDecision(Rejected, game, null)).Returns(Rejected);
 
             //act
             var result = _decisionModule.MakeDecision(1, 1);
 
             //assert
             Assert.Equal(Approved, result);
-            _mockActionHandler.Verify(handler => handler.HandleDecision(Approved, game), Times.Once);
-            _mockActionHandler.Verify(handler => handler.HandleDecision(Rejected, game), Times.Never);
+            _mockActionHandler.Verify(handler => handler.HandleDecision(Approved, game, null), Times.Once);
+            _mockActionHandler.Verify(handler => handler.HandleDecision(Rejected, game, null), Times.Never);
             _mockDiscountService.Verify(service => service.isEligibleForDiscount(user.UserAge), Times.Never);
         }
 
@@ -75,16 +75,16 @@ namespace ProjectTesting.Tests
             };
             _mockService.Setup(service => service.GetGame(2)).Returns(game);
             _mockUserService.Setup(service => service.GetUser(2)).Returns(user);
-            _mockActionHandler.Setup(handler => handler.HandleDecision(Approved, game)).Returns(Approved);
-            _mockActionHandler.Setup(handler => handler.HandleDecision(Rejected, game)).Returns(Rejected);
+            _mockActionHandler.Setup(handler => handler.HandleDecision(Approved, game, null)).Returns(Approved);
+            _mockActionHandler.Setup(handler => handler.HandleDecision(Rejected, game, null)).Returns(Rejected);
 
             //act
             var result = _decisionModule.MakeDecision(2, 2);
 
             //assert
             Assert.Equal(Rejected, result);
-            _mockActionHandler.Verify(handler => handler.HandleDecision(Rejected, game), Times.Once);
-            _mockActionHandler.Verify(handler => handler.HandleDecision(Approved, game), Times.Never);
+            _mockActionHandler.Verify(handler => handler.HandleDecision(Rejected, game, null), Times.Once);
+            _mockActionHandler.Verify(handler => handler.HandleDecision(Approved, game, null), Times.Never);
             _mockDiscountService.Verify(service => service.isEligibleForDiscount(user.UserAge), Times.Never);
         }
 
@@ -92,6 +92,7 @@ namespace ProjectTesting.Tests
         public void MakeDecision_ShouldApplyDiscount_WhenUserAgeIsGreaterThanOrEqualToGameDiscountAge()
         {
             //arrange
+            var discount = 20;
             var game = new Game
             {
                 Id = 3,
@@ -107,16 +108,17 @@ namespace ProjectTesting.Tests
             };
             _mockService.Setup(service => service.GetGame(3)).Returns(game);
             _mockUserService.Setup(service => service.GetUser(3)).Returns(user);
-            _mockActionHandler.Setup(handler => handler.HandleDecision(Approved, game)).Returns(Approved);
-            _mockActionHandler.Setup(handler => handler.HandleDecision(Rejected, game)).Returns(Rejected);
+            _mockDiscountService.Setup(service => service.isEligibleForDiscount(user.UserAge)).Returns(discount);
+            _mockActionHandler.Setup(handler => handler.HandleDecision(Approved, game, discount)).Returns(Approved);
+            _mockActionHandler.Setup(handler => handler.HandleDecision(Rejected, game, discount)).Returns(Rejected);
 
             //act
             var result = _decisionModule.MakeDecision(3, 3);
 
             //assert
             Assert.Equal(Approved, result);
-            _mockActionHandler.Verify(handler => handler.HandleDecision(Approved, game), Times.Once);
-            _mockActionHandler.Verify(handler => handler.HandleDecision(Rejected, game), Times.Never);
+            _mockActionHandler.Verify(handler => handler.HandleDecision(Approved, game, discount), Times.Once);
+            _mockActionHandler.Verify(handler => handler.HandleDecision(Rejected, game, discount), Times.Never);
             _mockDiscountService.Verify(service => service.isEligibleForDiscount(user.UserAge), Times.Once);
         }
 
@@ -167,7 +169,7 @@ namespace ProjectTesting.Tests
             var exception = Assert.Throws<Exception>(() => _decisionModule.MakeDecision(1, 1));
 
             //assert
-            Assert.Equal("An error occurred while making a decision.", exception.Message);
+            Assert.Equal("An error occurred while making a decision", exception.Message);
         }
     }
 }

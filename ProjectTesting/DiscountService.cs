@@ -10,9 +10,10 @@ namespace ProjectTesting
     {
         public double isEligibleForDiscount(int userAge)
         {
-            //hier komt dan de code voor het toepassen van een korting indien de gebruiker in aanmerking komt voor een korting
-            //elke game heeft een leeftijd waarop de gebruiker in aanmerking komt voor een korting
-            throw new NotImplementedException();
+            //hier komt dan de code voor het berekenen van de korting
+            //hoeveel korting er wordt toegepast hangt af van de leeftijd van de gebruiker
+            //momenteel als voorbeeld geef ik bv 7% korting als de gebruiker 70 is
+            return Math.Round(userAge * 0.1, 2);
         }
     }
 }

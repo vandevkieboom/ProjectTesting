@@ -8,6 +8,6 @@ namespace ProjectTesting
 {
     public interface IActionHandler
     {
-        public string HandleDecision(string decision, Game purchase);
+        public string HandleDecision(string decision, Game purchase, double? discount = null);
     }
 }
