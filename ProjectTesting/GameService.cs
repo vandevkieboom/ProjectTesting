@@ -8,7 +8,12 @@ namespace ProjectTesting
 {
     public class GameService : IGameService
     {
-        public string GameUrl { get; set; }
+        private string gameUrl;
+        public string GameUrl
+        {
+            get { return gameUrl; }
+            set { gameUrl = value; }
+        }
 
         public Game GetGame(int id)
         {

@@ -8,7 +8,12 @@ namespace ProjectTesting
 {
     public class UserService : IUserService
     {
-        public string UserUrl { get; set; }
+        private string userUrl;
+        public string UserUrl
+        {
+            get { return userUrl; }
+            set { userUrl = value; }
+        }
 
         public User GetUser(int id)
         {

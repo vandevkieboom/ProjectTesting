@@ -8,6 +8,6 @@ namespace ProjectTesting
 {
     public interface IDiscountService
     {
-        public double isEligibleForDiscount(int userAge);
+        double isEligibleForDiscount(int userAge);
     }
 }
