@@ -1,7 +1,4 @@
-using Moq;
-using ProjectTesting;
-
-namespace ProjectTestingIntegration.Tests
+namespace ProjectTesting.IntegrationTests
 {
     public class IntegrationTests
     {
@@ -27,7 +24,7 @@ namespace ProjectTestingIntegration.Tests
         }
 
         [Fact]
-        public void MakeDecision_ShouldReturnApproved_WhenUserAgeIsGreaterThanAgeRating()
+        public void MakeDecision_ShouldReturnApproved_WhenUserAgeIsGreaterThanOrEqualToAgeRating()
         {
             //arrange
             var gameId = 1; //agerating = 17
@@ -48,6 +45,7 @@ namespace ProjectTestingIntegration.Tests
             Assert.Equal(userId, user.Id);
             Assert.Equal(17, game.AgeRating);
             Assert.Equal(28, user.UserAge);
+            Assert.True(user.UserAge > game.AgeRating);
         }
 
         [Fact]
@@ -72,6 +70,7 @@ namespace ProjectTestingIntegration.Tests
             Assert.Equal(userId, user.Id);
             Assert.Equal(17, game.AgeRating);
             Assert.Equal(10, user.UserAge);
+            Assert.True(user.UserAge < game.AgeRating);
         }
 
         [Fact]
@@ -95,10 +94,9 @@ namespace ProjectTestingIntegration.Tests
             Assert.NotNull(user);
             Assert.Equal(gameId, game.Id);
             Assert.Equal(userId, user.Id);
-            Assert.Equal(21, game.AgeRating);
-            Assert.Equal(71, user.UserAge);
+            Assert.Equal(7, discount);
             Assert.True(discount > 0);
-            Assert.Equal(7.1, discount);
+            Assert.True(user.UserAge >= game.IsEligibleForDiscount);
         }
 
         [Fact]

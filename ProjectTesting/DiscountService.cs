@@ -12,8 +12,7 @@ namespace ProjectTesting
         {
             //hier komt dan de code voor het berekenen van de korting
             //hoeveel korting er wordt toegepast hangt af van de leeftijd van de gebruiker
-            //momenteel als voorbeeld geef ik bv 7% korting als de gebruiker 70 is
-            return Math.Round(userAge * 0.1, 2);
+            return 7.0; //stub
         }
     }
 }

@@ -38,7 +38,7 @@ namespace ProjectTesting
                 }
 
                 string decision;
-                double? discount = null;
+                double discount = 0; //default to 0 if user is not eligible for discount
                 if (user.UserAge < game.AgeRating)
                 {
                     decision = "Rejected";
