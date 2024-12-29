@@ -102,7 +102,7 @@ In tegenstelling tot unit tests worden hier geen mocks gebruikt. De echte implem
 
 ## Acceptance Tests
 
-### MakeDecision.feature
+### Making decisions based on user age, game age rating, and discount eligibility
 #### Scenario 1 - Approve decision when user age meets or exceeds game age rating
 - Valideert dat de beslissing "Approved" wordt teruggegeven wanneer de leeftijd van de gebruiker voldoet aan de leeftijdsvereisten van het spel.
 
@@ -112,7 +112,7 @@ In tegenstelling tot unit tests worden hier geen mocks gebruikt. De echte implem
 #### Scenario 3 - Apply discount when user is eligible for discount
 - Controleert of de juiste korting wordt toegepast voor gebruikers die in aanmerking komen op basis van hun leeftijd.
 
-### MakeDecisionFailure.feature
+### Handling failure scenarios in decision making
 #### Scenario 1 - Throw ArgumentException when game ID is invalid
 - Test dat een `ArgumentException` wordt gegenereerd wanneer een ongeldig spel-ID wordt gebruikt.
 
