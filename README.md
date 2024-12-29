@@ -113,24 +113,24 @@ In tegenstelling tot unit tests worden hier geen mocks gebruikt. De echte implem
 ## Acceptance Tests
 
 ### Making decisions based on user age, game age rating, and discount eligibility
-#### Scenario 1 - Approve decision when user age meets or exceeds game age rating
-- Valideert dat de beslissing "Approved" wordt teruggegeven wanneer de leeftijd van de gebruiker voldoet aan de leeftijdsvereisten van het spel.
+- **Scenario 1 - Approve decision when user age meets or exceeds game age rating**
+  - Valideert dat de beslissing "Approved" wordt teruggegeven wanneer de leeftijd van de gebruiker voldoet aan de leeftijdsvereisten van het spel.
 
-#### Scenario 2 - Reject decision when user age is less than game age rating
-- Controleert dat de beslissing "Rejected" wordt teruggegeven wanneer de gebruiker te jong is volgens de leeftijdsvereisten van het spel.
+- **Scenario 2 - Reject decision when user age is less than game age rating**
+  - Controleert dat de beslissing "Rejected" wordt teruggegeven wanneer de gebruiker te jong is volgens de leeftijdsvereisten van het spel.
 
-#### Scenario 3 - Apply discount when user is eligible for discount
-- Controleert of de juiste korting wordt toegepast voor gebruikers die in aanmerking komen op basis van hun leeftijd.
+- **Scenario 3 - Apply discount when user is eligible for discount**
+  - Controleert of de juiste korting wordt toegepast voor gebruikers die in aanmerking komen op basis van hun leeftijd.
 
 ### Handling failure scenarios in decision making
-#### Scenario 1 - Throw ArgumentException when game ID is invalid
-- Test dat een `ArgumentException` wordt gegenereerd wanneer een ongeldig spel-ID wordt gebruikt.
+- **Scenario 1 - Throw ArgumentException when game ID is invalid**
+  - Test dat een `ArgumentException` wordt gegenereerd wanneer een ongeldig spel-ID wordt gebruikt.
 
-#### Scenario 2 - Throw ArgumentException when user ID is invalid
-- Test dat een `ArgumentException` wordt gegenereerd wanneer een ongeldig gebruiker-ID wordt gebruikt.
+- **Scenario 2 - Throw ArgumentException when user ID is invalid**
+  - Test dat een `ArgumentException` wordt gegenereerd wanneer een ongeldig gebruiker-ID wordt gebruikt.
 
-#### Scenario 3 - Throw Exception when an error occurs
-- Verifieert dat een algemene uitzondering wordt gegenereerd wanneer een fout optreedt in de API of service.
+- **Scenario 3 - Throw Exception when an error occurs**
+  - Verifieert dat een algemene uitzondering wordt gegenereerd wanneer een fout optreedt in de API of service.
 
 ### Uitleg van Acceptatie Tests
 De acceptatietests zijn geschreven met behulp van de `Xunit.Gherkin.Quick` bibliotheek en verifiëren de functionaliteit van het systeem door middel van scenario's die zijn gedefinieerd in Gherkin-syntax. 
