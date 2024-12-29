@@ -38,10 +38,93 @@ Hetzelfde wordt gedaan met de korting om te testen of de gebruiker aan de kortin
 
 - **`IUserService`**: Vergelijkbaar met `IGameService`, wordt deze interface gebruikt door zowel de `UserService` als de `UserServiceApi`. Dit maakt het eenvoudig voor testing door de meest geschikte implementatie te kiezen op basis van de testomgeving.
 
-- **`IGameService`**: Vergelijkbaar met `IUserService`, wordt deze interface gebruikt door zowel de `GameService` als de `GameServiceApi` Dit maakt het eenvoudig voor testing door de meest geschikte implementatie te kiezen op basis van de testomgeving.
+- **`IGameService`**: Vergelijkbaar met `IUserService`, wordt deze interface gebruikt door zowel de `GameService` als de `GameServiceApi`. Dit maakt het eenvoudig voor testing door de meest geschikte implementatie te kiezen op basis van de testomgeving.
 
 - **`IDiscountService`**: Deze interface maakt het mogelijk om de logica voor het berekenen van kortingen te variëren. Dit maakt unit testing eenvoudig, omdat de kortingenlogica kan worden gemockt zonder de echte implementatie.
 
 - **`IActionHandler`**: Deze interface definieert acties op basis van beslissingen. Het maakt unit testing mogelijk doordat de acties kunnen worden gemockt en getest zonder ze daadwerkelijk uit te voeren.
 
 ---
+
+## Unit Tests
+- **MakeDecision_ShouldReturnApproved_WhenUserAgeIsGreaterThanOrEqualToAgeRating**
+  - Controleert of de beslissing "Approved" wordt wanneer de gebruiker oud genoeg is voor de leeftijdsvereisten van het spel.
+
+- **MakeDecision_ShouldReturnRejected_WhenUserAgeIsLessThanAgeRating**
+  - Controleert of de beslissing "Rejected" wordt wanneer de gebruiker te jong is voor de leeftijdsvereisten van het spel.
+
+- **MakeDecision_ShouldApplyDiscount_WhenUserAgeIsGreaterThanOrEqualToGameDiscountAge**
+  - Verifieert dat een korting wordt toegepast wanneer de gebruiker in aanmerking komt voor een leeftijdsgebonden korting.
+
+- **MakeDecision_ShouldThrowArgumentException_WhenGameIsNull**
+  - Controleert of een fout wordt gegenereerd wanneer een ongeldig game-ID wordt meegegeven.
+
+- **MakeDecision_ShouldThrowArgumentException_WhenUserIsNull**
+  - Controleert of een fout wordt gegenereerd wanneer een ongeldig gebruiker-ID wordt meegegeven.
+
+- **MakeDecision_ShouldThrowGenericException_WhenUnexpectedErrorOccurs**
+  - Controleert of een algemene foutmelding wordt gegenereerd wanneer er een onverwachte fout optreedt.
+
+### Uitleg van Unit Tests
+De unittests zijn gericht op het valideren van de functionaliteit van de DecisionModule onder verschillende omstandigheden. Hierbij maak ik gebruik van mocking om de afhankelijkheden van de module, zoals IGameService, IUserService, IDiscountService, en IActionHandler, te simuleren. Door mocks te gebruiken, kan ik het gedrag van deze afhankelijkheden controleren en specifieke scenario's creëren, zonder dat ik afhankelijk ben van hun daadwerkelijke implementaties.
+
+---
+
+## Integration Tests
+- **MakeDecision_ShouldReturnApproved_WhenUserAgeIsGreaterThanOrEqualToAgeRating**
+  - Valideert dat de beslissing "Approved" wordt teruggegeven wanneer de leeftijd van de gebruiker voldoet aan de leeftijdsvereisten van het spel. De test gebruikt Mockoon API’s voor gebruikers- en spelgegevens.
+
+- **MakeDecision_ShouldReturnRejected_WhenUserAgeIsLessThanAgeRating**
+  - Controleert dat de beslissing "Rejected" wordt teruggegeven wanneer de gebruiker te jong is volgens de leeftijdsvereisten van het spel.
+
+- **MakeDecision_ShouldApplyDiscount_WhenUserAgeIsGreaterThanOrEqualToGameDiscountAge**
+  - Controleert of de juiste korting wordt toegepast voor gebruikers die in aanmerking komen op basis van hun leeftijd.
+
+- **MakeDecision_ShouldThrowArgumentException_WhenGameIdIsInvalid**
+  - Test dat een `ArgumentException` wordt gegenereerd wanneer een ongeldig spel-ID wordt gebruikt.
+
+- **MakeDecision_ShouldThrowArgumentException_WhenUserIdIsInvalid**
+  - Test dat een `ArgumentException` wordt gegenereerd wanneer een ongeldig gebruiker-ID wordt gebruikt.
+
+- **MakeDecision_ShouldThrowException_WhenAnErrorOccurs**
+  - Verifieert dat een algemene uitzondering wordt gegenereerd wanneer een fout optreedt in de API of service.
+
+### Uitleg van Integratie Tests
+De integratietests valideren het gedrag van de `DecisionModule` in een realistische omgeving waarin de afhankelijkheden samenwerken. Dit omvat het gebruik van:
+
+- **IGameService** en **IUserService**: Deze services communiceren met Mockoon API’s om gegevens over spellen en gebruikers op te halen.
+- **IDiscountService**: Controleert of een gebruiker in aanmerking komt voor een korting.
+- **IActionHandler**: Voert acties uit op basis van de beslissing.
+
+In tegenstelling tot unit tests worden hier geen mocks gebruikt. De echte implementaties van de services worden getest, wat een vollediger beeld geeft van hoe de module zich gedraagt in een productie-achtige omgeving.
+
+---
+
+## Acceptance Tests
+
+### MakeDecision.feature
+#### Scenario 1 - Approve decision when user age meets or exceeds game age rating
+- Valideert dat de beslissing "Approved" wordt teruggegeven wanneer de leeftijd van de gebruiker voldoet aan de leeftijdsvereisten van het spel.
+
+#### Scenario 2 - Reject decision when user age is less than game age rating
+- Controleert dat de beslissing "Rejected" wordt teruggegeven wanneer de gebruiker te jong is volgens de leeftijdsvereisten van het spel.
+
+#### Scenario 3 - Apply discount when user is eligible for discount
+- Controleert of de juiste korting wordt toegepast voor gebruikers die in aanmerking komen op basis van hun leeftijd.
+
+### MakeDecisionFailure.feature
+#### Scenario 1 - Throw ArgumentException when game ID is invalid
+- Test dat een `ArgumentException` wordt gegenereerd wanneer een ongeldig spel-ID wordt gebruikt.
+
+#### Scenario 2 - Throw ArgumentException when user ID is invalid
+- Test dat een `ArgumentException` wordt gegenereerd wanneer een ongeldig gebruiker-ID wordt gebruikt.
+
+#### Scenario 3 - Throw Exception when an error occurs
+- Verifieert dat een algemene uitzondering wordt gegenereerd wanneer een fout optreedt in de API of service.
+
+### Uitleg van Acceptatie Tests
+De acceptatietests zijn geschreven met behulp van de `Xunit.Gherkin.Quick` bibliotheek en verifiëren de functionaliteit van het systeem door middel van scenario's die zijn gedefinieerd in Gherkin-syntax. 
+Deze tests zijn gericht op het valideren van de beslissingen die worden genomen door de `DecisionModule` op basis van verschillende gebruikers- en gamegegevens. 
+
+Net zoals integratie tests maken de tests gebruik van echte API-responses via Mockoon. Dit zorgt ervoor dat de tests de werkelijke interacties in het systeem valideren, wat een realistischer beeld geeft van hoe het systeem zich gedraagt in een productieomgeving. Door gebruik te maken van Mockoon kunnen we API-responses simuleren.
+
