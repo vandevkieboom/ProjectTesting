@@ -1,5 +1,15 @@
 # Opdracht Testing
 
+## Navigatie
+- [Informatie](#informatie)
+- [Structuur](#structuur)
+- [Interfaces](#interfaces)
+- [Unit Tests](#unit-tests)
+- [Integration Tests](#integration-tests)
+- [Acceptance Tests](#acceptance-tests)
+
+---
+
 ## Informatie
 Het project is iets uitgebreider dan de overkoepelende oefening; ik hoop dat dit oké is (ik heb me een beetje laten gaan). 
 Het idee is een soort winkel waar we videogames kopen en de aankoop wordt geautomatiseerd. 
@@ -127,4 +137,3 @@ De acceptatietests zijn geschreven met behulp van de `Xunit.Gherkin.Quick` bibli
 Deze tests zijn gericht op het valideren van de beslissingen die worden genomen door de `DecisionModule` op basis van verschillende gebruikers- en gamegegevens. 
 
 Net zoals integratie tests maken de tests gebruik van echte API-responses via Mockoon. Dit zorgt ervoor dat de tests de werkelijke interacties in het systeem valideren, wat een realistischer beeld geeft van hoe het systeem zich gedraagt in een productieomgeving. Door gebruik te maken van Mockoon kunnen we API-responses simuleren.
-
