@@ -1,0 +1,234 @@
+{
+  "uuid": "1df635d2-437b-4487-8b7a-cbb293942641",
+  "lastMigration": 33,
+  "name": "App",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3001,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "92a385ae-861c-41f7-8fce-fb7f92fb6a99",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "",
+      "responses": [
+        {
+          "uuid": "d40ff2d6-9a5a-4062-937a-dfd3ed12b5f6",
+          "body": "Available API's are /Users and /Games",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "7380f2a2-19bb-4231-bcb7-34c19e1d5138",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "Users",
+      "responses": [
+        {
+          "uuid": "144821bf-1482-426b-a105-5e82e1378f0b",
+          "body": "[\n  {\n    \"id\": 1,\n    \"userName\": \"vandevkieboom\",\n    \"userAge\": 28\n  },\n  {\n    \"id\": 2,\n    \"userName\": \"FortniteGamer\",\n    \"userAge\": 10\n  },\n  {\n    \"id\": 3,\n    \"userName\": \"Senior Gamer\",\n    \"userAge\": 71\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "bc473994-c4e0-40a0-bb35-bd4669223fed",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "Games",
+      "responses": [
+        {
+          "uuid": "dc5fd3be-b563-4939-bd1d-33c0ed783211",
+          "body": "[\n  {\n    \"id\": 1,\n    \"gameTitle\": \"Path of Exile 2\",\n    \"ageRating\": 17,\n    \"isEligibleForDiscount\": 55\n  },\n  {\n    \"id\": 2,\n    \"gameTitle\": \"World of Warcraft\",\n    \"ageRating\": 12,\n    \"isEligibleForDiscount\": 70\n  },\n  {\n    \"id\": 3,\n    \"gameTitle\": \"Senior Adventures\",\n    \"ageRating\": 21,\n    \"isEligibleForDiscount\": 65\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "b5047ccd-2ca5-4460-912e-1fa36b2afc4a",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "Users/:id",
+      "responses": [
+        {
+          "uuid": "47ab320f-5b73-42d9-b494-f48f10610cb4",
+          "body": "{\r\n  \"id\": \"{{urlParam 'id'}}\",\r\n  \"userName\": \"{{#if (eq (urlParam 'id') '1')}}vandevkieboom{{/if}}{{#if (eq (urlParam 'id') '2')}}FortniteGamer{{/if}}{{#if (eq (urlParam 'id') '3')}}Senior Gamer{{/if}}\",\r\n  \"userAge\": \"{{#if (eq (urlParam 'id') '1')}}28{{/if}}{{#if (eq (urlParam 'id') '2')}}10{{/if}}{{#if (eq (urlParam 'id') '3')}}71{{/if}}\"\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "8e1e0a1e-2f46-4e73-9edd-a6568b0eb2cf",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "Games/:id",
+      "responses": [
+        {
+          "uuid": "bc7a7aa8-d328-4403-b2a1-0caabbb53d33",
+          "body": "{\n  \"id\": \"{{urlParam 'id'}}\",\n  \"gameTitle\": \"{{#if (eq (urlParam 'id') '1')}}Path of Exile 2{{/if}}{{#if (eq (urlParam 'id') '2')}}World of Warcraft{{/if}}{{#if (eq (urlParam 'id') '3')}}Senior Adventures{{/if}}\",\n  \"ageRating\": \"{{#if (eq (urlParam 'id') '1')}}17{{/if}}{{#if (eq (urlParam 'id') '2')}}12{{/if}}{{#if (eq (urlParam 'id') '3')}}21{{/if}}\",\n  \"isEligibleForDiscount\": \"{{#if (eq (urlParam 'id') '1')}}55{{/if}}{{#if (eq (urlParam 'id') '2')}}70{{/if}}{{#if (eq (urlParam 'id') '3')}}65{{/if}}\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "92a385ae-861c-41f7-8fce-fb7f92fb6a99"
+    },
+    {
+      "type": "route",
+      "uuid": "7380f2a2-19bb-4231-bcb7-34c19e1d5138"
+    },
+    {
+      "type": "route",
+      "uuid": "b5047ccd-2ca5-4460-912e-1fa36b2afc4a"
+    },
+    {
+      "type": "route",
+      "uuid": "bc473994-c4e0-40a0-bb35-bd4669223fed"
+    },
+    {
+      "type": "route",
+      "uuid": "8e1e0a1e-2f46-4e73-9edd-a6568b0eb2cf"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}
