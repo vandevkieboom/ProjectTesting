@@ -1,8 +1,8 @@
 ﻿using Xunit.Gherkin.Quick;
 
-namespace ProjectTesting.AcceptanceTests
+namespace ProjectTesting.AcceptanceTests.StepDefinitions
 {
-    [FeatureFile(@"C:\Users\vande\source\repos\ProjectTesting\ProjectTestingAcceptance.Tests\Features\MakeDecisionFailure.feature")]
+    [FeatureFile("./Features/MakeDecisionFailure.feature")]
     public sealed class AcceptanceTestsFailureSteps : Feature
     {
         private const string mockoonUsers = "http://localhost:3001/Users";

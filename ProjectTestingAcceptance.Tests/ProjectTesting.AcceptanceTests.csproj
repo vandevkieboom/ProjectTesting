@@ -36,4 +36,22 @@
 	  <ProjectReference Include="..\ProjectTesting\ProjectTesting.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="StepDefinitions\AcceptanceTestsFailureSteps.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="StepDefinitions\AcceptanceTestsSteps.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Features\MakeDecision.feature">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Features\MakeDecisionFailure.feature">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
